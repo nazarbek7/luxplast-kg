@@ -65,16 +65,17 @@ export default function AdminProductsPage() {
   const closeModal = () => { setModal(null); setEditTarget(null); };
 
   const handleImageUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
     setUploading(true);
     try {
-      const { url } = await uploadApi.upload(file);
-      setForm((p) => ({ ...p, images: [...p.images, url] }));
+      const urls = await Promise.all(files.map((f) => uploadApi.upload(f).then((r) => r.url)));
+      setForm((p) => ({ ...p, images: [...p.images, ...urls] }));
     } catch {
       setError('Ошибка загрузки изображения');
     } finally {
       setUploading(false);
+      e.target.value = '';
     }
   };
 
@@ -229,7 +230,7 @@ export default function AdminProductsPage() {
                   ))}
                   <label className={`w-16 h-16 rounded-lg border-2 border-dashed border-gray-200 flex flex-col items-center justify-center cursor-pointer hover:border-brand hover:bg-primary-50 transition-colors ${uploading ? 'opacity-50' : ''}`}>
                     {uploading ? <Loader2 size={16} className="animate-spin text-brand" /> : <><ImagePlus size={18} className="text-gray-400" /><span className="text-xs text-gray-400 mt-0.5">Фото</span></>}
-                    <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} disabled={uploading} />
+                    <input type="file" accept="image/*" multiple className="hidden" onChange={handleImageUpload} disabled={uploading} />
                   </label>
                 </div>
                 <p className="text-xs text-gray-400 mt-1">Или вставьте URL: <input value="" placeholder="https://..." className="inline border-b border-gray-200 text-xs focus:outline-none focus:border-brand w-40" onBlur={(e) => { if (e.target.value) { setForm((p) => ({ ...p, images: [...p.images, e.target.value] })); e.target.value = ''; }}} /></p>
