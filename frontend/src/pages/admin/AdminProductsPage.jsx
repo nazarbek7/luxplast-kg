@@ -146,6 +146,7 @@ export default function AdminProductsPage() {
       {loading ? (
         <div className="flex justify-center py-20"><Loader2 className="animate-spin text-brand" size={32} /></div>
       ) : (
+        <>
         {/* Mobile cards */}
         <div className="md:hidden space-y-2">
           {products.map((p) => (
@@ -218,6 +219,7 @@ export default function AdminProductsPage() {
             </tbody>
           </table>
         </div>
+        </>
       )}
 
       {/* Pagination */}
