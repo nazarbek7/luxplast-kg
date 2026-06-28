@@ -87,10 +87,10 @@ export default function CatalogPage() {
 
       {/* Контент */}
       <div className="container-custom py-6">
-      <div className="flex gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-[208px_1fr] xl:grid-cols-[224px_1fr] gap-6 items-start">
 
         {/* Сайдбар — выровнен с логотипом */}
-        <aside className="hidden lg:flex flex-col flex-shrink-0 w-52 xl:w-56 bg-white rounded-2xl border border-gray-100 p-3 sticky top-20 self-start">
+        <aside className="hidden lg:flex flex-col w-52 xl:w-56 bg-white rounded-2xl border border-gray-100 p-3 sticky top-20 self-start">
           <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest px-2 pb-2 pt-1">
             Категории
           </p>
@@ -143,7 +143,7 @@ export default function CatalogPage() {
         )}
 
         {/* Правая колонка: поиск + товары */}
-        <div className="flex-1 min-w-0 flex flex-col gap-4">
+        <div className="min-w-0 flex flex-col gap-4">
 
           {/* Поиск + фильтр */}
           <div className="flex items-center gap-3">
