@@ -71,11 +71,11 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-2">
               <MapPin size={16} className="mt-0.5 flex-shrink-0 text-brand-light" />
-              <span>Бишкек, рынок «Дордой»</span>
+              <span>Бишкек, Дордой, Джунхай, 7-й проход, 16в</span>
             </li>
           </ul>
           <a
-            href="https://2gis.kg"
+            href="https://2gis.kg/bishkek/firm/70000001094812363"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 mt-4 text-xs text-brand-light hover:underline"

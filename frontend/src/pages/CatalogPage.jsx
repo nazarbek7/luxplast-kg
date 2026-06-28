@@ -86,6 +86,7 @@ export default function CatalogPage() {
       </div>
 
       {/* Контент */}
+      <div className="flex-1 w-full">
       <div className="container-custom py-6">
       <div className="grid grid-cols-1 lg:grid-cols-[208px_1fr] xl:grid-cols-[224px_1fr] gap-6 items-start">
 
@@ -229,6 +230,7 @@ export default function CatalogPage() {
             </>
           )}
         </div>
+      </div>
       </div>
       </div>
 
