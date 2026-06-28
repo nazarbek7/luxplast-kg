@@ -51,7 +51,7 @@ export default function CatalogPage() {
           setTotalPages(data.totalPages || 1);
           setTotal(data.total || 0);
         })
-        .catch(() => { if (!cancelled) setProducts([]); })
+        .catch(() => { if (!cancelled) { setProducts([]); setTotal(0); } })
         .finally(() => { if (!cancelled) setLoading(false); });
     }, search ? 400 : 0);
     return () => { cancelled = true; clearTimeout(timer); };
