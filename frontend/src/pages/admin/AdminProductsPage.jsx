@@ -165,7 +165,7 @@ export default function AdminProductsPage() {
                         {p.images?.[0] ? <img src={p.images[0]} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-gray-300 text-xs">IMG</div>}
                       </div>
                       <div className="min-w-0">
-                        <div className="font-medium text-gray-800 truncate max-w-[180px] flex items-center gap-1">
+                        <div className="font-medium text-gray-800 flex items-center gap-1">
                           {p.isFeatured && <Star size={12} className="text-amber-400 flex-shrink-0" />}
                           {p.name}
                         </div>
