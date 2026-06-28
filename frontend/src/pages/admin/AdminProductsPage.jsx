@@ -146,14 +146,43 @@ export default function AdminProductsPage() {
       {loading ? (
         <div className="flex justify-center py-20"><Loader2 className="animate-spin text-brand" size={32} /></div>
       ) : (
-        <div className="bg-white rounded-2xl border border-gray-100 overflow-x-auto">
+        {/* Mobile cards */}
+        <div className="md:hidden space-y-2">
+          {products.map((p) => (
+            <div key={p._id} className="bg-white rounded-2xl border border-gray-100 p-3 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-gray-100 flex-shrink-0 overflow-hidden">
+                {p.images?.[0] ? <img src={p.images[0]} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-gray-300 text-xs">IMG</div>}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="font-medium text-gray-800 text-sm flex items-center gap-1">
+                  {p.isFeatured && <Star size={11} className="text-amber-400 flex-shrink-0" />}
+                  <span className="truncate">{p.name}</span>
+                </div>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="text-brand font-semibold text-sm">{p.price ? `${p.price} ${p.priceUnit}` : 'По запросу'}</span>
+                  <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-medium ${p.inStock ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-600'}`}>
+                    {p.inStock ? 'В наличии' : 'Нет'}
+                  </span>
+                </div>
+                <div className="text-xs text-gray-400 mt-0.5">{p.category?.name || '—'}</div>
+              </div>
+              <div className="flex flex-col gap-1.5 flex-shrink-0">
+                <button onClick={() => openEdit(p)} className="p-2 rounded-xl text-gray-400 hover:text-brand hover:bg-primary-50 transition-colors"><Pencil size={15} /></button>
+                <button onClick={() => handleDelete(p)} className="p-2 rounded-xl text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"><Trash2 size={15} /></button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop table */}
+        <div className="hidden md:block bg-white rounded-2xl border border-gray-100 overflow-x-auto">
           <table className="w-full text-sm min-w-[600px]">
             <thead className="bg-gray-50 border-b border-gray-100">
               <tr>
                 <th className="px-4 py-3 text-left font-semibold text-gray-600">Товар</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-600 hidden md:table-cell">Категория</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-600">Категория</th>
                 <th className="px-4 py-3 text-left font-semibold text-gray-600">Цена</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-600 hidden sm:table-cell">Статус</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-600">Статус</th>
                 <th className="px-4 py-3 text-right font-semibold text-gray-600">Действия</th>
               </tr>
             </thead>
@@ -165,22 +194,18 @@ export default function AdminProductsPage() {
                       <div className="w-10 h-10 rounded-lg bg-gray-100 flex-shrink-0 overflow-hidden">
                         {p.images?.[0] ? <img src={p.images[0]} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-gray-300 text-xs">IMG</div>}
                       </div>
-                      <div className="min-w-0">
-                        <div className="font-medium text-gray-800 flex items-center gap-1">
-                          {p.isFeatured && <Star size={12} className="text-amber-400 flex-shrink-0" />}
-                          {p.name}
-                        </div>
+                      <div className="font-medium text-gray-800 flex items-center gap-1">
+                        {p.isFeatured && <Star size={12} className="text-amber-400 flex-shrink-0" />}
+                        {p.name}
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-gray-500 hidden md:table-cell">{p.category?.name || '—'}</td>
+                  <td className="px-4 py-3 text-gray-500">{p.category?.name || '—'}</td>
                   <td className="px-4 py-3 font-semibold text-brand">{p.price ? `${p.price} ${p.priceUnit}` : '—'}</td>
-                  <td className="px-4 py-3 hidden sm:table-cell">
-                    <div className="flex gap-1.5">
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${p.inStock ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-600'}`}>
-                        {p.inStock ? 'В наличии' : 'Нет'}
-                      </span>
-                    </div>
+                  <td className="px-4 py-3">
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${p.inStock ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-600'}`}>
+                      {p.inStock ? 'В наличии' : 'Нет'}
+                    </span>
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-2">
@@ -206,8 +231,8 @@ export default function AdminProductsPage() {
 
       {/* Modal */}
       {modal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center sm:p-4">
+          <div className="bg-white rounded-t-2xl sm:rounded-2xl shadow-xl w-full sm:max-w-2xl max-h-[92vh] overflow-y-auto">
             <div className="flex items-center justify-between p-6 border-b border-gray-100 sticky top-0 bg-white z-10">
               <h2 className="text-lg font-bold text-gray-900">
                 {modal === 'create' ? 'Новый товар' : 'Редактировать товар'}
