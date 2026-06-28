@@ -182,7 +182,7 @@ export default function CatalogPage() {
 
           {/* Спиннер */}
           {loading && (
-            <div className="flex flex-col items-center justify-center py-32 gap-3">
+            <div className="w-full flex flex-col items-center justify-center py-32 gap-3">
               <Loader2 size={36} className="animate-spin text-brand" />
               <p className="text-sm text-gray-400">Загружаем товары...</p>
             </div>
@@ -190,7 +190,7 @@ export default function CatalogPage() {
 
           {/* Пусто */}
           {!loading && products.length === 0 && (
-            <div className="flex flex-col items-center justify-center py-24 bg-white rounded-2xl border border-gray-100">
+            <div className="w-full flex flex-col items-center justify-center py-24 bg-white rounded-2xl border border-gray-100">
               <div className="text-5xl mb-4">📦</div>
               <p className="text-gray-700 font-semibold text-lg">Товары не найдены</p>
               <p className="text-gray-400 text-sm mt-1 text-center">
