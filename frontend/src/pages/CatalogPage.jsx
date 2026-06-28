@@ -85,8 +85,9 @@ export default function CatalogPage() {
         </div>
       </div>
 
-      {/* Контент — тот же container что и хедер */}
-      <div className="container-custom py-6 flex gap-6 flex-1 items-start">
+      {/* Контент */}
+      <div className="container-custom py-6">
+      <div className="flex gap-6 items-start">
 
         {/* Сайдбар — выровнен с логотипом */}
         <aside className="hidden lg:flex flex-col flex-shrink-0 w-52 xl:w-56 bg-white rounded-2xl border border-gray-100 p-3 sticky top-20 self-start">
@@ -228,6 +229,7 @@ export default function CatalogPage() {
             </>
           )}
         </div>
+      </div>
       </div>
 
       <Footer />
