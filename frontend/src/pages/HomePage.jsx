@@ -6,6 +6,7 @@ import Footer from '../components/layout/Footer';
 import ProductCard from '../components/ui/ProductCard';
 import CategoryCard from '../components/ui/CategoryCard';
 import { categoryApi, productApi } from '../services/api';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 const WA_LINK = 'https://wa.me/996504502233';
 
@@ -17,6 +18,7 @@ const ADVANTAGES = [
 ];
 
 export default function HomePage() {
+  usePageMeta(null, 'Одноразовая посуда и упаковочные материалы оптом и в розницу. Бишкек, рынок Дордой. Бесплатная доставка по КР.');
   const [categories, setCategories] = useState([]);
   const [featured, setFeatured] = useState([]);
   const [loading, setLoading] = useState(true);

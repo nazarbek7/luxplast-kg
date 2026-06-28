@@ -6,6 +6,7 @@ import Footer from '../components/layout/Footer';
 import ProductCard from '../components/ui/ProductCard';
 import { productApi } from '../services/api';
 import { useCart } from '../context/CartContext';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 const PLACEHOLDER = 'https://placehold.co/600x600/e0f2fe/0369a1?text=LUXPLAST';
 const WA_NUMBER = '996504502233';
@@ -14,6 +15,10 @@ export default function ProductDetailPage() {
   const { slug } = useParams();
   const { addItem } = useCart();
   const [product, setProduct] = useState(null);
+  usePageMeta(
+    product ? product.name : null,
+    product ? `${product.name} — купить оптом и в розницу в Бишкеке. ${product.description ? product.description.slice(0, 100) : 'LUXPLAST.KG — рынок Дордой. Бесплатная доставка по КР.'}` : null
+  );
   const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

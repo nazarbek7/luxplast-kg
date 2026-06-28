@@ -5,6 +5,7 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import ProductCard from '../components/ui/ProductCard';
 import { categoryApi, productApi } from '../services/api';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 export default function CatalogPage() {
   const { categorySlug } = useParams();
@@ -56,6 +57,13 @@ export default function CatalogPage() {
     }, search ? 400 : 0);
     return () => { cancelled = true; clearTimeout(timer); };
   }, [activeCategory, search, page, categoriesLoaded]);
+
+  usePageMeta(
+    activeCategory ? activeCategory.name : 'Каталог',
+    activeCategory
+      ? `${activeCategory.name} — купить оптом и в розницу. Бишкек, рынок Дордой. Бесплатная доставка по КР.`
+      : 'Каталог одноразовой посуды и упаковки. Коробки для пиццы, ланч-боксы, стаканы, пакеты. Бишкек, Дордой.'
+  );
 
   const handleCategoryClick = (cat) => {
     setSidebarOpen(false);
