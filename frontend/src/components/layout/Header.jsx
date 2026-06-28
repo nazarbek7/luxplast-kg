@@ -1,6 +1,6 @@
+import { Menu, Package2, Phone, ShoppingCart, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Package2, Phone, Menu, X, ShoppingCart } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 
 const PHONE = '+996 504 502 233';
